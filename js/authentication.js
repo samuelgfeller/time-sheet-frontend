@@ -109,6 +109,7 @@ function register(formId) {
             type: 'post',
             dataType: "json",
             contentType: "application/json; charset=utf-8",
+            headers: {'Authorization' : 'Bearer ' + localStorage.getItem("token")},
             data: JSON.stringify({
                 name: $('#registerNameInp').val(),
                 email: $('#registerEmailInp').val(),
