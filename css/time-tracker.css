@@ -1,0 +1,31 @@
+#timeTrackerBox{
+    text-align: center;
+}
+#trackingTimeDisplay{
+    display: inline-block;
+    padding: 20px 0 10px 0px;
+    /*background: white;*/
+    font-size: 3em;
+
+}
+#playIconDiv{
+    /*display: inline-block;*/
+    width: 120px;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+    /*padding: 20px;*/
+}
+#playIconDiv:hover{
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+#playIcon{
+    width: 30%;
+    margin: 10px;
+    vertical-align: middle;
+    /*float: left;*/
+    /*background: white;*/
+
+}
