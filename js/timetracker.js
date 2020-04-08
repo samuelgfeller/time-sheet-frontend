@@ -1,4 +1,10 @@
 $(document).ready(function () {
+
+    checkIfTimerIsRunning();
+
+
+
+    // Event listener on Start button
     $('#toggleIconDiv').on('click', function () {
         if ($('#toggleIconDiv').data('status') === 'start') {
             $('#trackingTimeDisplay').css('color', 'grey');
@@ -8,9 +14,39 @@ $(document).ready(function () {
             $('#trackingTimeDisplay').css('color', 'grey');
             stopTimer();
         }
-
     });
+
 });
+
+function checkIfTimerIsRunning() {
+    $.ajax({
+        url: config.api_url + 'timers',
+        dataType: "json",
+        type: 'get',
+        data: {
+          requested_resource:'running_timer'
+        },
+        headers: {'Authorization': 'Bearer ' + localStorage.getItem("token")},
+    }).done(function (output) {
+        // output = JSON.parse(output);
+        if (output !== '') {
+            if (output['running_timer_start'] !== 'null') {
+                localStorage.setItem("start_time", output['running_timer_start']);
+                $('#trackingTimeDisplay').css('color', 'black');
+                calculateStartTimeValue();
+                startJsTimer();
+            } else {
+                localStorage.removeItem("start_time");
+                $('#trackingTimeDisplay').css('color', 'black');
+            }
+        } else {
+            console.log(output);
+        }
+    }).fail(function (xhr) {
+        handleFail(xhr);
+    });
+}
+
 
 function startTimer() {
     $.ajax({
@@ -23,7 +59,7 @@ function startTimer() {
         if (output !== '') {
             if (typeof output['start_time'] !== 'undefined') {
                 localStorage.setItem("start_time", output['start_time']);
-                $('trackingTimeDisplay').css('color', 'black');
+                $('#trackingTimeDisplay').css('color', 'black');
                 calculateStartTimeValue();
                 startJsTimer();
             } else {
@@ -46,7 +82,7 @@ function stopTimer() {
     }).done(function (output) {
         // output = JSON.parse(output);
         if (output !== '') {
-            $('trackingTimeDisplay').css('color', 'black');
+            $('#trackingTimeDisplay').css('color', 'black');
             localStorage.removeItem("start_time");
             stopJsTimer();
         } else {
