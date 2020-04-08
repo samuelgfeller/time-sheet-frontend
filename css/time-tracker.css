@@ -22,9 +22,9 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
-#playIcon{
-    width: 30%;
-    margin: 10px;
+#toggleIcon{
+    width: 25%;
+    margin: 13px;
     vertical-align: middle;
     /*float: left;*/
     /*background: white;*/
