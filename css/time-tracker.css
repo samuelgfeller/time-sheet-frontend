@@ -8,7 +8,7 @@
     font-size: 3em;
 
 }
-#playIconDiv{
+#toggleIconDiv{
     /*display: inline-block;*/
     width: 120px;
     margin: auto;
@@ -17,7 +17,7 @@
 
     /*padding: 20px;*/
 }
-#playIconDiv:hover{
+#toggleIconDiv:hover{
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
