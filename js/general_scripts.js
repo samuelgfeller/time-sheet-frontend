@@ -85,7 +85,7 @@ function calculateTimeDifference(startDateTime, endDateTime) {
     let timeDiff = {};
 
     // Calculating the difference between two dates. Result are Milliseconds
-    let diffInMs = currentDate.getTime() - startDate.getTime();
+    let diffInMs = endDateTime.getTime() - startDateTime.getTime();
     // Convert ms to seconds
     let diffInSeconds = diffInMs / 1000;
     // Converting seconds to minutes
