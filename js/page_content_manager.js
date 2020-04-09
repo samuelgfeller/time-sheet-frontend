@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     });
     $('#allTimeSheetNavBtn').on('click', function () {
-        location.href = config.frontend_url + 'pages/all-time-sheet.html';
+        location.href = config.frontend_url + 'pages/time-sheet.html';
     });
 
 });

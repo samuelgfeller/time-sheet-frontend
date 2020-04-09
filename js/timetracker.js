@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     checkIfTimerIsRunning();
 
-    setInterval(checkIfTimerIsRunning, 15000);
+    setInterval(checkIfTimerIsRunning, 30000);
 
 
     // Event listener on Start button
