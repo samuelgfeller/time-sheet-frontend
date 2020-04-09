@@ -115,24 +115,16 @@ function stopTimer() {
 let h = 0, m = 0, s = 0, t, timerIsRunning = false;
 
 function calculateStartTimeValue() {
+
     // Calculate from where the timer should start
     let startDate = new Date(localStorage.getItem("start_time"));
     let currentDate = new Date();
 
-    // Calculating the difference between two dates. Result are Milliseconds
-    let diffInMs = currentDate.getTime() - startDate.getTime();
-    // Convert ms to seconds
-    let diffInSeconds = diffInMs / 1000;
-    // Converting seconds to minutes
-    let diffInMin = diffInSeconds / 60;
-    // Calculating hours
-    h = Math.floor(diffInMin / 60);
-    // Calculating minutes that can't be hours. Modulo returns the remainder after number is divided so the maximal dividable by 60 is in hours and the remainder will
-    // be caught by the modulo operator. If the diff in min is 125 -> 120 min is dividable by 60 and it gives 2(h) but since its 125 there is a remainder of
-    // 5min which the modulo exactly highlights. Math.floor is removing the decimals only keeping the integer
-    m = Math.floor(diffInMin % 60);
-    // The seconds remainder in regards to the next 60 which are the minutes can be calculated with the same principle with the modulo operator
-    s = Math.floor(diffInSeconds % 60);
+    let timeDiff = calculateTimeDifference(startDate, currentDate);
+    h = timeDiff['h'];
+    m = timeDiff['m'];
+    s = timeDiff['s'];
+
 }
 
 
@@ -164,9 +156,9 @@ function stopJsTimer() {
     clearInterval(t);
     timerIsRunning = false;
 
-    s = 0;
-    m = 0;
     h = 0;
+    m = 0;
+    s = 0;
 
     $('#trackingTimeDisplay').css('color', 'black');
     $("#activityTextArea").prop('disabled', false);
