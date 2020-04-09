@@ -9,17 +9,31 @@
     color: grey;
 
 }
+
+#activityTextArea{
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: none;
+    padding: 10px;
+    font-size: 1.3em;
+    outline: none;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.01);
+}
+#activityTextArea:focus{
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+}
+
 #toggleIconDiv{
     /*display: inline-block;*/
     width: 120px;
     margin: auto;
     border-radius: 12px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
 
     /*padding: 20px;*/
 }
 #toggleIconDiv:hover{
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 #toggleIcon{
@@ -28,5 +42,4 @@
     vertical-align: middle;
     /*float: left;*/
     /*background: white;*/
-
 }

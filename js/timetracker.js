@@ -2,7 +2,6 @@ $(document).ready(function () {
 
     checkIfTimerIsRunning();
 
-
     // Event listener on Start button
     $('#toggleIconDiv').on('click', function () {
         if ($('#toggleIconDiv').data('status') === 'start') {
@@ -51,6 +50,9 @@ function startTimer() {
         url: config.api_url + 'timers',
         dataType: "json",
         type: 'post',
+        data: {
+          activity:$('#activityTextArea').val()
+        },
         headers: {'Authorization': 'Bearer ' + localStorage.getItem("token")},
     }).done(function (output) {
         // output = JSON.parse(output);
@@ -65,6 +67,12 @@ function startTimer() {
             console.log(output);
         }
     }).fail(function (xhr) {
+        // Check if the error the timer already running
+        if(typeof xhr.responseJSON.errCode !== 'undefined' && xhr.responseJSON.errCode === 'timer_already_started'){
+            checkIfTimerIsRunning();
+        }else{
+            startJsTimer();
+        }
         handleFail(xhr);
     });
 }
@@ -122,6 +130,7 @@ function calculateStartTimeValue() {
 
 function startJsTimer() {
     $('#trackingTimeDisplay').css('color', 'black');
+    $("#activityTextArea").prop('disabled', true);
     calculateStartTimeValue();
 
     // Change start button to stop
@@ -132,7 +141,7 @@ function startJsTimer() {
 }
 
 /**
- * This function is called every second and is part of the infinite loop
+ * This function is called every second
  */
 function runTimer() {
     //  Called here the first time because  countUp is called only after 1second so the timer would be late of 1s
@@ -149,6 +158,8 @@ function stopJsTimer() {
     h = 0;
 
     $('#trackingTimeDisplay').css('color', 'black');
+    $("#activityTextArea").prop('disabled', false);
+    $("#activityTextArea").val('');
 
     // Change stop button to start
     $('#toggleIconDiv').data('status', 'start');
