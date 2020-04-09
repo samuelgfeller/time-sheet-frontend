@@ -2,6 +2,9 @@ $(document).ready(function () {
 
     checkIfTimerIsRunning();
 
+    setInterval(checkIfTimerIsRunning, 15000);
+
+
     // Event listener on Start button
     $('#toggleIconDiv').on('click', function () {
         if ($('#toggleIconDiv').data('status') === 'start') {
@@ -29,12 +32,19 @@ function checkIfTimerIsRunning() {
         // output = JSON.parse(output);
         if (output !== '') {
             if (output['running_timer_start'] !== 'null') {
+                // Replace start time in localstorage in case user modified it
                 localStorage.setItem("start_time", output['running_timer_start']);
                 $('#trackingTimeDisplay').css('color', 'black');
-                startJsTimer();
-            } else {
-                localStorage.removeItem("start_time");
+                if (isTimerRunning() === false){
+                    $("#activityTextArea").val(output['activity']);
+                    startJsTimer();
+                }
+            } else if (output['running_timer_start'] === 'null') {
                 $('#trackingTimeDisplay').css('color', 'black');
+                if (isTimerRunning() === true) {
+                    localStorage.removeItem("start_time");
+                    stopJsTimer();
+                }
             }
         } else {
             console.log(output);
@@ -68,11 +78,9 @@ function startTimer() {
         }
     }).fail(function (xhr) {
         // Check if the error the timer already running
-        if(typeof xhr.responseJSON.errCode !== 'undefined' && xhr.responseJSON.errCode === 'timer_already_started'){
-            checkIfTimerIsRunning();
-        }else{
-            startJsTimer();
-        }
+        // if(typeof xhr.responseJSON.errCode !== 'undefined' && xhr.responseJSON.errCode === 'timer_already_started'){
+        // }
+        checkIfTimerIsRunning();
         handleFail(xhr);
     });
 }
@@ -104,7 +112,7 @@ function stopTimer() {
     });
 }
 
-let h = 0, m = 0, s = 0, t;
+let h = 0, m = 0, s = 0, t, timerIsRunning = false;
 
 function calculateStartTimeValue() {
     // Calculate from where the timer should start
@@ -138,6 +146,7 @@ function startJsTimer() {
     $("#toggleIcon").attr("src", "/img/stop_icon.png");
 
     runTimer();
+    timerIsRunning = true;
 }
 
 /**
@@ -153,6 +162,8 @@ function runTimer() {
 
 function stopJsTimer() {
     clearInterval(t);
+    timerIsRunning = false;
+
     s = 0;
     m = 0;
     h = 0;
@@ -184,6 +195,10 @@ function countUp() {
 
     // Start the js timer all the time as long as countUp() is called
     // runTimer();
+}
+
+function isTimerRunning(){
+    return timerIsRunning;
 }
 
 function displayTime(){
