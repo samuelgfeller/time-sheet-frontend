@@ -70,6 +70,11 @@ function startTimer() {
 }
 
 function stopTimer() {
+    // Stop timer for visual comfort but if request fails, the timer starts again
+    stopJsTimer();
+    // Grey until successful response from server
+    $('#trackingTimeDisplay').css('color', 'grey');
+
     $.ajax({
         url: config.api_url + 'timers',
         dataType: "json",
@@ -77,8 +82,16 @@ function stopTimer() {
         headers: {'Authorization': 'Bearer ' + localStorage.getItem("token")},
     }).done(function (output) {
         localStorage.removeItem("start_time");
-        stopJsTimer();
+        $('#trackingTimeDisplay').css('color', 'black');
     }).fail(function (xhr) {
+        // Check if the error is that the timer is not running
+        if(typeof xhr.responseJSON.errCode !== 'undefined' && xhr.responseJSON.errCode === 'timer_not_running'){
+            localStorage.removeItem("start_time");
+            $('#trackingTimeDisplay').css('color', 'black');
+        }else{
+            startJsTimer();
+        }
+
         handleFail(xhr);
     });
 }
@@ -122,17 +135,15 @@ function startJsTimer() {
  * This function is called every second and is part of the infinite loop
  */
 function runTimer() {
-    //  Displayed here because countUp is called only after 1second so the timer would be late of 1s
-    $('#trackingTimeDisplay').text((h ? (h > 9 ? h : "0" + h) : "00") + ":"
-        + (m ? (m > 9 ? m : "0" + m) : "00") + ":"
-        + (s > 9 ? s : "0" + s));
+    //  Called here the first time because  countUp is called only after 1second so the timer would be late of 1s
+    displayTime();
 
-    t = setTimeout(countUp, 1000);
+    t = setInterval(countUp, 1000);
 
 }
 
 function stopJsTimer() {
-    clearTimeout(t);
+    clearInterval(t);
     s = 0;
     m = 0;
     h = 0;
@@ -147,6 +158,7 @@ function stopJsTimer() {
 }
 
 function countUp() {
+
     s++;
     if (s >= 60) {
         s = 0;
@@ -157,6 +169,15 @@ function countUp() {
         }
     }
 
+    displayTime();
+
     // Start the js timer all the time as long as countUp() is called
-    runTimer();
+    // runTimer();
+}
+
+function displayTime(){
+    $('#trackingTimeDisplay').text((h ? (h > 9 ? h : "0" + h) : "00") + ":"
+        + (m ? (m > 9 ? m : "0" + m) : "00") + ":"
+        + (s > 9 ? s : "0" + s));
+
 }
