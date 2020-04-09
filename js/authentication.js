@@ -117,9 +117,8 @@ function register(formId) {
                 password2: $('#registerPassword2Inp').val(),
             }),
         }).done(function (output) {
-            localStorage.setItem('token', output.token);
             $('.loggedInInfo').remove();
-            $("#registerFormBox").prepend("<b class='loggedInInfo greenText''>Registered and logged in.</b>");
+            $("#registerFormBox").prepend("<b class='loggedInInfo greenText''>Benutzer erstellt.</b>");
 
         }).fail(function (xhr) {
             handleFail(xhr);
