@@ -60,7 +60,6 @@ function isBreached(password) {
     var hashsuffix = pwhash.substr(5);
     let result = false;
 
-    // todo implement async function to return after result https://stackoverflow.com/a/5316805/9013718
     $.ajax({
         url: `https://api.pwnedpasswords.com/range/${hashprefix}`,
         async: false,

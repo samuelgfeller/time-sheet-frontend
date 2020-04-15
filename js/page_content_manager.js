@@ -1,9 +1,5 @@
 $(document).ready(function () {
 
-    $('#userListNavBtn').on('click', function () {
-        location.href = config.frontend_url + 'pages/userlist.html';
-
-    });
     $('#loginNavBtn').on('click', function () {
         location.href = config.frontend_url + 'pages/login.html';
 
