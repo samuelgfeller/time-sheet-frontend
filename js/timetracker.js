@@ -29,16 +29,18 @@ function checkIfTimerIsRunning() {
         },
         headers: {'Authorization': 'Bearer ' + localStorage.getItem("token")},
     }).done(function (output) {
-        // output = JSON.parse(output);
         if (output !== '') {
             if (output['running_timer_start'] !== 'null') {
-                // Replace start time in localstorage in case user modified it
-                localStorage.setItem("start_time", output['running_timer_start']);
-                $('#trackingTimeDisplay').css('color', 'black');
-                if (isTimerRunning() === false){
+                // Check if time in localstorage changed. If yes, the calculation has to be started again
+                if(localStorage.getItem("start_time") !== output['running_timer_start'] || isTimerRunning() === false){
+                    // Replace start time in localstorage in it got modified it
+                    localStorage.setItem("start_time", output['running_timer_start']);
                     $("#activityTextArea").val(output['activity']);
                     startJsTimer();
                 }
+
+                $('#trackingTimeDisplay').css('color', 'black');
+
             } else if (output['running_timer_start'] === 'null') {
                 $('#trackingTimeDisplay').css('color', 'black');
                 if (isTimerRunning() === true) {
