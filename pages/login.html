@@ -28,18 +28,19 @@
         </div>
 
         <div class="formBox" id="loginFormBox">
+            <i>Fields marked with * are required</i>
             <form action="/login" id="loginForm" class="blueForm" method="post" autocomplete="on">
                 <!--           todo high prio add wrong credentials functionality
                 <?php if (!empty($errClassName)) { ?>
                                 <span class="errSpan">Wrong credentials. Please try again.</span> <br> <br>
                                 <?php } ?>-->
-                <label for="loginEmailInp">Email</label>
+                <label for="loginEmailInp">Email *</label>
                 <!--             todo normal add error class ("wrongCredInput") to both inputs-->
                 <input type="email" name="email" id="loginEmailInp" class=""
                        placeholder="your@email.com"
                        maxlength="254"
                        required>
-                <label for="loginPasswordInp">Password</label>
+                <label for="loginPasswordInp">Password *</label>
                 <input type="password" name="password" id="loginPasswordInp"
                        minlength="3" required>
 <!--                <br><a class="discreteLink" href="login/password/reset/mail">Lost password?</a>-->

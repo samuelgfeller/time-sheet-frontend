@@ -89,7 +89,7 @@ function login(formId) {
         }).done(function (output) {
             localStorage.setItem('token', output.token);
             $('.loggedInInfo').remove();
-            $("#loginFormBox").prepend("<b class='loggedInInfo greenText''>Logged in.</b>");
+            $("#loginFormBox").prepend("<b class='loggedInInfo greenText''>Logged in.</b><br>");
 
         }).fail(function (xhr) {
             handleFail(xhr);
@@ -117,7 +117,7 @@ function register(formId) {
             }),
         }).done(function (output) {
             $('.loggedInInfo').remove();
-            $("#registerFormBox").prepend("<b class='loggedInInfo greenText''>Benutzer erstellt.</b>");
+            $("#registerFormBox").prepend("<b class='loggedInInfo greenText''>Benutzer erstellt.</b><br>");
 
         }).fail(function (xhr) {
             handleFail(xhr);
