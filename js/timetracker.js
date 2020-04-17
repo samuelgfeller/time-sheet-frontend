@@ -32,7 +32,7 @@ function checkIfTimerIsRunning() {
         if (output !== '') {
             if (output['running_timer_start'] !== 'null') {
                 // Check if time in localstorage changed. If yes, the calculation has to be started again
-                if(localStorage.getItem("start_time") !== output['running_timer_start'] || isTimerRunning() === false){
+                if (localStorage.getItem("start_time") !== output['running_timer_start'] || isTimerRunning() === false) {
                     // Replace start time in localstorage in it got modified it
                     localStorage.setItem("start_time", output['running_timer_start']);
                     $("#activityTextArea").val(output['activity']);
@@ -63,7 +63,7 @@ function startTimer() {
         dataType: "json",
         type: 'post',
         data: {
-          activity:$('#activityTextArea').val()
+            activity: $('#activityTextArea').val()
         },
         headers: {'Authorization': 'Bearer ' + localStorage.getItem("token")},
     }).done(function (output) {
@@ -103,10 +103,10 @@ function stopTimer() {
         $('#trackingTimeDisplay').css('color', 'black');
     }).fail(function (xhr) {
         // Check if the error is that the timer is not running
-        if(typeof xhr.responseJSON.errCode !== 'undefined' && xhr.responseJSON.errCode === 'timer_not_running'){
+        if (typeof xhr.responseJSON.errCode !== 'undefined' && xhr.responseJSON.errCode === 'timer_not_running') {
             localStorage.removeItem("start_time");
             $('#trackingTimeDisplay').css('color', 'black');
-        }else{
+        } else {
             startJsTimer();
         }
 
@@ -191,11 +191,11 @@ function countUp() {
     // runTimer();
 }
 
-function isTimerRunning(){
+function isTimerRunning() {
     return timerIsRunning;
 }
 
-function displayTime(){
+function displayTime() {
     $('#trackingTimeDisplay').text((h ? (h > 9 ? h : "0" + h) : "00") + ":"
         + (m ? (m > 9 ? m : "0" + m) : "00") + ":"
         + (s > 9 ? s : "0" + s));

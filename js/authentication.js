@@ -76,7 +76,7 @@ function isBreached(password) {
  *
  */
 function login(formId) {
-    if(formIsValid(formId)){
+    if (formIsValid(formId)) {
         $.ajax({
             url: config.api_url + 'login',
             type: 'post',
@@ -108,7 +108,7 @@ function register(formId) {
             type: 'post',
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            headers: {'Authorization' : 'Bearer ' + localStorage.getItem("token")},
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem("token")},
             data: JSON.stringify({
                 name: $('#registerNameInp').val(),
                 email: $('#registerEmailInp').val(),
@@ -179,6 +179,7 @@ function sha1(msg) {
         }
         return utftext;
     }
+
     var blockstart;
     var i, j;
     var W = new Array(80);

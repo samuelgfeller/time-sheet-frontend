@@ -1,7 +1,8 @@
-#timeTrackerBox{
+#timeTrackerBox {
     text-align: center;
 }
-#trackingTimeDisplay{
+
+#trackingTimeDisplay {
     display: inline-block;
     padding: 20px 0 10px 0px;
     /*background: white;*/
@@ -10,7 +11,7 @@
 
 }
 
-#activityTextArea{
+#activityTextArea {
     margin-bottom: 15px;
     border-radius: 12px;
     border: none;
@@ -19,11 +20,12 @@
     outline: none;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.01);
 }
-#activityTextArea:focus{
+
+#activityTextArea:focus {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
 }
 
-#toggleIconDiv{
+#toggleIconDiv {
     /*display: inline-block;*/
     width: 120px;
     margin: auto;
@@ -32,11 +34,13 @@
 
     /*padding: 20px;*/
 }
-#toggleIconDiv:hover{
+
+#toggleIconDiv:hover {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
-#toggleIcon{
+
+#toggleIcon {
     width: 25%;
     margin: 13px;
     vertical-align: middle;
@@ -45,7 +49,7 @@
 }
 
 
-#timeSheetTable{
+#timeSheetTable {
     border-collapse: collapse;
     width: 100%;
 }
